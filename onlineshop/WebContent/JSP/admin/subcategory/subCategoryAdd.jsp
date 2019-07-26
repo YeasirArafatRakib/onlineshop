@@ -80,7 +80,8 @@
 								<label>Category</label>
 								<select class="form-control" name="catId">	
 									<c:forEach var = "cat" items="${category}">
-										<option value="${cat.catId }"><c:out value="${cat.catName }"></c:out></option>
+										
+										<option value="${cat.catId }" ${cat.catId eq subcatdata.catId ? 'selected' : '' }><c:out value="${cat.catName }"></c:out></option>
 									</c:forEach> 
 								</select>
 							</div>

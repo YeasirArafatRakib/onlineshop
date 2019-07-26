@@ -14,18 +14,27 @@ public class SubCategoryData {
 		this.catId = catId;
 	}
 	public SubCategoryData() {
-		super();
+		
 	}
 	public SubCategoryData(int subCatId, String subCatName, String catName, String subCatStatus) {
+		this.subCatId = subCatId;
+		this.subCatName = subCatName;
+		this.subCatStatus = subCatStatus;
+//		this(subCatId,subCatName,subCatStatus);
+		this.catName = catName;
+
+		
+	}
+	
+	
+	
+	public SubCategoryData(int subCatId, String subCatName, String subCatStatus, int catId) {
 		super();
 		this.subCatId = subCatId;
 		this.subCatName = subCatName;
-		this.catName = catName;
 		this.subCatStatus = subCatStatus;
-	}
-	
-	
-	
+		this.catId = catId;
+ 	}
 	public int getSubCatId() {
 		return subCatId;
 	}

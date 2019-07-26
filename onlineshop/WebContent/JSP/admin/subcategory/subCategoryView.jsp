@@ -39,7 +39,7 @@
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/ProductManagement?submit=ViewProduct">View Product</a></li>
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/ProductManagement?submit=productAdd">Add Product</a></li>
 					<li class="nav-item"><a class="nav-link " href="productManage.jsp">Manage Product</a></li>
-					<li class="nav-item"><a class="nav-link " href="/onlineshop/CategoryManagement?submit=AddCategory">Add Categories</a></li>
+					<li class="nav-item"><a class="nav-link " href="/onlineshop/CategoryManagement">View Categories</a></li>
 					<li class="nav-item"><a class="nav-link active"	href="#">View SubCategories</a></li>
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/SubCategoryManagement?submit=AddSubCategory">Add SubCategories</a></li>
 					<li class="nav-item"><a class="nav-link " href="orderView.jsp">View Order</a></li>

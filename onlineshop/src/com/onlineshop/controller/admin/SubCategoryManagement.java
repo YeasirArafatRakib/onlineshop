@@ -76,15 +76,40 @@ public class SubCategoryManagement extends HttpServlet {
 	}
 
 
-	private void editSubCategory(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	private void editSubCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int cid = Integer.parseInt(request.getParameter("id"));
+		System.out.println(cid);
+		try {
+			subdata = subdao.getSubCategoryInfo(cid);
+			List<CategoryData> category = catdao.viewCategory();
+			request.setAttribute("category", category);
+			request.setAttribute("subcatdata", subdata);
+			request.setAttribute("action", "edit");
+			request.getRequestDispatcher("/JSP/admin/subcategory/subCategoryAdd.jsp").forward(request, response);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
-	private void deleteSubCategory(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	private void deleteSubCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int sId = Integer.parseInt(request.getParameter("id"));
+		System.out.println(sId);
+		try {
+			boolean deleteSts = subdao.deleteSubCategoryInfo(sId);
+			if(deleteSts)
+			{
+				response.sendRedirect("/onlineshop/SubCategoryManagement");
+			}
+			else
+			{
+				response.sendRedirect("/onlineshop/JSP/404page.jsp");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -109,12 +134,12 @@ public class SubCategoryManagement extends HttpServlet {
 
 			case "AddSubCategory":
 			{
-				AddCategoryPost(request,response);
+				AddSubCategoryPost(request,response);
 				break;
 			}
 			case "EditSubCategory":
 			{
-				EditCategoryPost(request,response);
+				EditSubCategoryPost(request,response);
 				break;
 			}
 			}
@@ -122,13 +147,34 @@ public class SubCategoryManagement extends HttpServlet {
 	}
 
 
-	private void EditCategoryPost(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	private void EditSubCategoryPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int sId = Integer.parseInt(request.getParameter("subCatId"));
+		String name = request.getParameter("subCatName").toString();
+		String status = request.getParameter("subCatStatus").toString();
+		int catId = Integer.parseInt(request.getParameter("catId"));
+		subdata.setSubCatName(name);
+		subdata.setCatId(catId);
+		subdata.setSubCatStatus(status);
+		try {
+			boolean updatests = subdao.updateSubCategoryInfo(sId, subdata);
+			if(updatests)
+			{
+				response.sendRedirect("/onlineshop/SubCategoryManagement");
+			}
+			else
+			{
+				request.setAttribute("error", "Not Successfull..Something is wrong!!");
+				request.getRequestDispatcher("/JSP/admin/subcategory/subcategoryAdd.jsp").include(request, response);			
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 
-	private void AddCategoryPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void AddSubCategoryPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 	
 		String name = request.getParameter("subCatName").toString();
 		int id = Integer.parseInt(request.getParameter("catId"));

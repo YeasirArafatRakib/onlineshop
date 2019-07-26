@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.onlineshop.bean.CategoryData;
 import com.onlineshop.bean.SubCategoryData;
 import com.onlineshop.utils.DBConnection;
 
@@ -55,47 +54,50 @@ public class SubCategoryDAO {
 		return sts;
 	}
 	
-	public SubCategoryData getSubCategoryInfo( int cid) throws SQLException
+	public SubCategoryData getSubCategoryInfo( int sid) throws SQLException
 	{
 		SubCategoryData subcatdata = null;
 		con = db.createConnection();
-		sql = "SELECT * FROM sub_categories WHERE cat_id = ?";
+		sql = "SELECT * FROM sub_categories WHERE sub_id = ?";
 		pst = con.prepareStatement(sql);
-		pst.setInt(1, cid);
+		pst.setInt(1, sid);
 		rs = pst.executeQuery();
 		while(rs.next())
 		{
 			int id = rs.getInt(1);
 			String name = rs.getString(2);
-			String catsts = rs.getString(3);
-			subcatdata = new SubCategoryData();
+			String subcatsts = rs.getString(3);
+			int catId = rs.getInt(4);
+			subcatdata = new SubCategoryData(id,name,subcatsts,catId);
+			
 		}
 		
 		return subcatdata;
 	}
 	
-	public boolean updateCategoryInfo( int cid,CategoryData catdata) throws SQLException
+	public boolean updateSubCategoryInfo( int sId,SubCategoryData subdata) throws SQLException
 	{
-		System.out.println(cid + " in dao update");
+		System.out.println(sId + " in dao update");
 		con = db.createConnection();
-		sql = "UPDATE categories SET cat_name = ? , cat_status = ? WHERE cat_id = ?";
+		sql = "UPDATE sub_categories SET sub_name = ? , sub_status = ? , cat_id = ? WHERE sub_id = ?";
 		pst = con.prepareStatement(sql);
-		pst.setString(1, catdata.getCatName());
-		pst.setString(2, catdata.getCatStatus());
-		pst.setInt(3, cid);
+		pst.setString(1, subdata.getSubCatName());
+		pst.setString(2, subdata.getSubCatStatus());
+		pst.setInt(3, subdata.getCatId());
+		pst.setInt(4, sId);
 		sts = pst.executeUpdate() > 0;
 		pst.close();
 		con.close();
 		return sts;
 	}
 	
-	public boolean deleteCategoryInfo( int cid) throws SQLException
+	public boolean deleteSubCategoryInfo( int sId) throws SQLException
 	{
-		System.out.println(cid + " in dao update");
+		System.out.println(sId + " in dao update");
 		con = db.createConnection();
-		sql = "DELETE FROM categories WHERE cat_id = ?";
+		sql = "DELETE FROM sub_categories WHERE sub_id = ?";
 		pst = con.prepareStatement(sql);
-		pst.setInt(1, cid);
+		pst.setInt(1, sId);
 		sts = pst.executeUpdate() > 0;
 		pst.close();
 		con.close();
