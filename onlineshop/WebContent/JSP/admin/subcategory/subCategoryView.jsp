@@ -39,9 +39,9 @@
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/ProductManagement?submit=ViewProduct">View Product</a></li>
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/ProductManagement?submit=productAdd">Add Product</a></li>
 					<li class="nav-item"><a class="nav-link " href="productManage.jsp">Manage Product</a></li>
-					<li class="nav-item"><a class="nav-link active"	href="#">View Categories</a></li>
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/CategoryManagement?submit=AddCategory">Add Categories</a></li>
-					<li class="nav-item"><a class="nav-link "	href="/onlineshop/SubCategoryManagement">View SubCategories</a></li>
+					<li class="nav-item"><a class="nav-link active"	href="#">View SubCategories</a></li>
+					<li class="nav-item"><a class="nav-link " href="/onlineshop/SubCategoryManagement?submit=AddSubCategory">Add SubCategories</a></li>
 					<li class="nav-item"><a class="nav-link " href="orderView.jsp">View Order</a></li>
 					<li class="nav-item"><a class="nav-link " href="orderManage.jsp">Manage Order</a></li>
 					<li class="nav-item"><a class="nav-link " href="/onlineshop/admin?submit=AdminLogout">Logout</a></li>
@@ -60,23 +60,25 @@
 						<table class="table table-hover ">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>Name</th>
+									<th>Sub Id</th>
+									<th>Sub Name</th>
+									<th>Cat Name</th>
 									<th>Status</th>
 									<th>Action</th>
 									
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="cat" items="${category }">
+								<c:forEach var="subcat" items="${subcategory }">
 							
 								<tr>
-									<td><c:out value="${cat.catId }"></c:out></td>
-									<td><c:out value="${cat.catName }"></c:out></td>
-									<td><c:out value="${cat.catStatus }"></c:out></td>
+									<td><c:out value="${subcat.subCatId }"></c:out></td>
+									<td><c:out value="${subcat.subCatName }"></c:out></td>
+									<td><c:out value="${subcat.catName }"></c:out></td>
+									<td><c:out value="${subcat.subCatStatus }"></c:out></td>
 									<td>
-									<a href="/onlineshop/CategoryManagement?submit=EditCategory&id=${cat.catId}">Edit</a>
-									<a href="/onlineshop/CategoryManagement?submit=DeleteCategory&id=${cat.catId}">Delete</a>
+									<a href="/onlineshop/SubCategoryManagement?submit=EditSubCategory&id=${subcat.subCatId}">Edit</a>
+									<a href="/onlineshop/SubCategoryManagement?submit=DeleteSubCategory&id=${subcat.subCatId}">Delete</a>
 									</td>
 								</tr>
 								</c:forEach>

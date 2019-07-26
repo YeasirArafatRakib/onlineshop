@@ -4,6 +4,7 @@ public class CategoryData {
 	private int catId;
 	private String catName;
 	private String catStatus;
+
 	public int getCatId() {
 		return catId;
 	}

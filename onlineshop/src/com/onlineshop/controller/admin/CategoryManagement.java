@@ -41,12 +41,6 @@ public class CategoryManagement extends HttpServlet {
 					editCategory(request,response);	
 					break;
 				}
-//				case "ViewCategory" :
-//				{
-//					System.out.println("view category");
-//					viewCategory(request,response);
-//					break;
-//				}
 				case "DeleteCategory" :
 				{
 					deleteCategory(request,response);	
@@ -110,7 +104,6 @@ public class CategoryManagement extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 
